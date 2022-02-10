@@ -12,12 +12,11 @@ inputs:
      'File that contains all the commands a user could call on the command line to assemble an image'
     required: true
 runs:
-  using: 'docker'
-  image: 'Dockerfile'
-  args:
-    - DISTRO_NAME: ${{ inputs.distro-name }}
-    - PROJECT-NAME: ${{ inputs.project-name}}
-    - ${{ inputs.distro-name }}
-  env:
-    DISTRO_NAME: ${{ inputs.distro-name }}
-    PROJECT-NAME: ${{ inputs.project-name}}
+  using: "composite"
+  steps:
+    - id: docker-autoproj
+      shell: bash
+      run: ./runner.sh "${{ inputs.distro-name }}"
+      env:
+        DISTRO_NAME: ${{ inputs.distro-name }}
+        PROJECT-NAME: ${{ inputs.project-name}}
