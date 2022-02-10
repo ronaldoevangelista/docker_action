@@ -14,10 +14,9 @@ inputs:
 runs:
   using: 'docker'
   image: 'Dockerfile'
-  build-args:
-    DISTRO_NAME: ${{ inputs.distro-name }}
-    PROJECT-NAME: ${{ inputs.project-name}}
   args:
+    - DISTRO_NAME: ${{ inputs.distro-name }}
+    - PROJECT-NAME: ${{ inputs.project-name}}
     - ${{ inputs.distro-name }}
   env:
     DISTRO_NAME: ${{ inputs.distro-name }}
