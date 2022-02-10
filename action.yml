@@ -1,7 +1,10 @@
 name: 'Action to docker autoproj'
 description: 'GitHub Action for run autoproj projects in docker container'
 inputs:
-  distro:
+  distro-name:
+    description: "Ubuntu distribution"
+    required: true
+  project-name:
     description: "Ubuntu distribution"
     required: true
   docker-file:
@@ -12,4 +15,4 @@ runs:
   using: 'docker'
   image: 'Dockerfile'
   args:
-    - ${{ inputs.distro }}
+    - ${{ inputs.distro-name }}
