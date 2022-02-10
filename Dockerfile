@@ -1,4 +1,4 @@
-ARG DISTRO_NAME=${distro-name:-'alpine:3.10'}
+ARG DISTRO_NAME=${DISTRO_NAME:-'alpine:3.10'}
 FROM ${DISTRO_NAME}
 
 # FROM alpine:3.10
