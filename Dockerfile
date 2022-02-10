@@ -1,5 +1,6 @@
-ARG distro-name
-FROM $distro-name
+ARG DISTRO_NAME=${distro-name}
+FROM ${DISTRO_NAME}
+
 # FROM alpine:3.10
 
 # Copies your code file from your action repository to the filesystem path `/` of the container
