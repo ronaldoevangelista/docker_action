@@ -19,4 +19,4 @@ runs:
       run: ./runner.sh "${{ inputs.distro-name }}"
       env:
         DISTRO_NAME: ${{ inputs.distro-name }}
-        PROJECT-NAME: ${{ inputs.project-name}}
+        PROJECT_NAME: ${{ inputs.project-name}}
