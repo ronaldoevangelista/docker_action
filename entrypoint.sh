@@ -4,7 +4,7 @@ echo "Hello $1"
 time=$(date)
 echo ::set-output name=time::$time
 
-version=$(cat /etc//etc/issue)
+version=$(cat /etc/issue)
 
 echo "version ${version}"
 
