@@ -1,15 +1,15 @@
-name: 'docker action'
-description: 'Greet someone and record the time'
+name: 'Action to docker autoproj'
+description: 'GitHub Action for run autoproj projects in docker container'
 inputs:
-  who-to-greet:  # id of input
-    description: 'Who to greet'
+  distro:
+    description: "Ubuntu distribution"
     required: true
-    default: 'World'
-outputs:
-  time: # id of output
-    description: 'The time we greeted you'
+  docker-file:
+    description: >
+     'File that contains all the commands a user could call on the command line to assemble an image'
+    required: true
 runs:
   using: 'docker'
   image: 'Dockerfile'
   args:
-    - ${{ inputs.who-to-greet }}
+    - ${{ inputs.distro }}
