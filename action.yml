@@ -2,21 +2,23 @@ name: 'Action to docker autoproj'
 description: 'GitHub Action for run autoproj projects in docker container'
 inputs:
   distro-name:
-    description: "Ubuntu distribution"
+    description: 'Ubuntu distribution'
     required: true
   project-name:
-    description: "Ubuntu distribution"
+    description: 'Ubuntu distribution'
     required: true
-  docker-file:
+  bootstrap:
     description: >
-     'File that contains all the commands a user could call on the command line to assemble an image'
+      address package build conf containing all 
+      commands to install download and install packages
     required: true
 runs:
-  using: "composite"
+  using: 'composite'
   steps:
     - id: docker-autoproj
       shell: bash
       run: ./runner.sh
       env:
         DISTRO:  ${{ inputs.distro-name }}
-        PROJECT: ${{ inputs.project-name}}
+        PROJECT: ${{ inputs.project-name }}
+        BOOTSTRAP: ${{ inputs.bootstrap }}
