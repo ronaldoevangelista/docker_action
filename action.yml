@@ -17,6 +17,4 @@ runs:
     - id: docker-autoproj
       shell: bash
       run: ./runner.sh
-      env:
-        DISTRO: ${{ inputs.distro-name }}
-        PROJECT: ${{ inputs.project-name}}
+

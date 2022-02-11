@@ -8,10 +8,10 @@ export DISTRO="${DISTRO:-"bionic"}"
 export BASE_IMAGE="nvidia/opengl:1.0-glvnd-runtime-ubuntu18.04";
 export IMAGE_NAME=${PROJECT}-${DISTRO}:devel
 
-printf "%s\n env" "$PROJECT"      | sed "$OPT_SED_INDENT"
-printf "%s\n env" "$DISTRO"       | sed "$OPT_SED_INDENT"
-printf "%s\n env" "$BASE_IMAGE"   | sed "$OPT_SED_INDENT"
-printf "%s\n env" "$IMAGE_NAME"   | sed "$OPT_SED_INDENT"
+printf "-- %s\n env" "$PROJECT"      | sed "$OPT_SED_INDENT"
+printf "-- %s\n env" "$DISTRO"       | sed "$OPT_SED_INDENT"
+printf "-- %s\n env" "$BASE_IMAGE"   | sed "$OPT_SED_INDENT"
+printf "-- %s\n env" "$IMAGE_NAME"   | sed "$OPT_SED_INDENT"
 
 docker build --compress \
              --no-cache=true \
