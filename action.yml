@@ -18,5 +18,5 @@ runs:
       shell: bash
       run: ./runner.sh "${{ inputs.distro-name }}"
       env:
-        DISTRO_NAME: ${{ inputs.distro-name }}
-        PROJECT_NAME: ${{ inputs.project-name}}
+        DISTRO: ${{ inputs.distro-name }}
+        PROJECT: ${{ inputs.project-name}}
