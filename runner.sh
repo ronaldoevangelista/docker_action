@@ -8,20 +8,24 @@ export DISTRO="${DISTRO:-"bionic"}"
 export BASE_IMAGE="nvidia/opengl:1.0-glvnd-runtime-ubuntu18.04";
 export IMAGE_NAME=${PROJECT}-${DISTRO}:devel
 
-printf "-- %s\n env" "$PROJECT"      | sed "$OPT_SED_INDENT"
-printf "-- %s\n env" "$DISTRO"       | sed "$OPT_SED_INDENT"
-printf "-- %s\n env" "$BASE_IMAGE"   | sed "$OPT_SED_INDENT"
-printf "-- %s\n env" "$IMAGE_NAME"   | sed "$OPT_SED_INDENT"
+printf "%s\n env" "$PROJECT"      | sed "$OPT_SED_INDENT"
+printf "%s\n env" "$DISTRO"       | sed "$OPT_SED_INDENT"
+printf "%s\n env" "$BASE_IMAGE"   | sed "$OPT_SED_INDENT"
+printf "%s\n env" "$IMAGE_NAME"   | sed "$OPT_SED_INDENT"
 
-docker build --compress \
-             --no-cache=true \
+echo "::group::Build Image"
+docker build --rm \
              --build-arg BASE_IMAGE=${BASE_IMAGE} \
+             --compress \
+             --no-cache=true \
              -t ${IMAGE_NAME} .
+echo "::endgroup::"
 
-docker run -t -i --rm \
+echo "::group::Run docker"
+docker run -t --rm \
             --net host \
             --name overview \
-            -e DISTRO=${DISTRO} 
+            -e DISTRO=${DISTRO} \
             ${IMAGE_NAME}
 
 # docker run -d -t -i --rm -p 5051:5051
