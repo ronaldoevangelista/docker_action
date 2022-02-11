@@ -18,5 +18,5 @@ runs:
       shell: bash
       run: ./runner.sh
       env:
-        BASE_IMAGE:  ${{ inputs.distro-name }}
+        DISTRO:  ${{ inputs.distro-name }}
         PROJECT: ${{ inputs.project-name}}
