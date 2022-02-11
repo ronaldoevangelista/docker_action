@@ -1,8 +1,8 @@
 #!/bin/sh -l
 
-export DISTRO="${DISTRO:-}"
+export PROJECT="${PROJECT:-}"
 
-echo ">>>DISTRO ${DISTRO}"
+echo "ENTRYPOINT::PROJECT ${PROJECT}"
 
 time=$(date)
 echo ::set-output name=time::$time
