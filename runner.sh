@@ -5,29 +5,13 @@ OPT_SED_INDENT='s/^/      /'
 # Settings
 export PROJECT="${PROJECT:-"overview"}"
 export DISTRO="${DISTRO:-"bionic"}"
-
-PROJECT_PATH="$HOME/workspace/${PROJECT}_${DISTRO}"
-BASE_IMAGE="nvidia/opengl:1.0-glvnd-runtime-ubuntu18.04";
-
-USER="$(id -nu)"
-UUID="$(id -u)"
-UGID="$(id -g)"
-
-export PROJECT
-export PROJECT_PATH
-export USER
-export UUID
-export UGID
-
-CONTAINER_USER=${USER}-${PROJECT}
-
+export BASE_IMAGE="nvidia/opengl:1.0-glvnd-runtime-ubuntu18.04";
 export IMAGE_NAME=${PROJECT}-${DISTRO}:devel
 
-printf "%s\n" "$PROJECT"      | sed "$OPT_SED_INDENT"
-printf "%s\n" "$DISTRO"       | sed "$OPT_SED_INDENT"
-printf "%s\n" "$PROJECT_PATH" | sed "$OPT_SED_INDENT"
-printf "%s\n" "$BASE_IMAGE"   | sed "$OPT_SED_INDENT"
-printf "%s\n" "$IMAGE_NAME"   | sed "$OPT_SED_INDENT"
+printf "%s\n env" "$PROJECT"      | sed "$OPT_SED_INDENT"
+printf "%s\n env" "$DISTRO"       | sed "$OPT_SED_INDENT"
+printf "%s\n env" "$BASE_IMAGE"   | sed "$OPT_SED_INDENT"
+printf "%s\n env" "$IMAGE_NAME"   | sed "$OPT_SED_INDENT"
 
 docker build --compress \
              --no-cache=true \
@@ -39,7 +23,6 @@ docker run -t -i --rm \
             --name overview \
             -e DISTRO=${DISTRO} 
             ${IMAGE_NAME}
-
 
 # docker run -d -t -i --rm -p 5051:5051
 # --network=training_net -e NODE_ENV=${NODE_ENV} -e DATABASE_HOST=${DATABASE_HOST}
