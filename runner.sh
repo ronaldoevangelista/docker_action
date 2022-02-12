@@ -3,8 +3,7 @@
 OPTION_SED_INDENT='s/^/      /'
 
 # Settings
-export PROJECT=${PROJECT:-"sonarsim"}
-
+if [ -f "$PROJECT" ]; then export PROJECT=$(<${PROJECT:-"sonarsim"}); fi
 if [ -f "$DISTRO" ]; then export DISTRO=$(<${DISTRO:-"focal"}); fi
 if [ -f "$BOOTSTRAP" ]; then export BOOTSTRAP=$(<${BOOTSTRAP:-}); fi
 
@@ -12,7 +11,7 @@ export IMAGE_NAME=${PROJECT}-${DISTRO}:devel
 export USER="$(id -nu)"
 export UUID="$(id -u)"
 export UGID="$(id -g)"
-export WORKSPACE="~/workspace/${PROJECT}_${DISTRO}"
+export USER_WORKSPACE="~/workspace"
 
 case ${DISTRO} in
     "xenial")

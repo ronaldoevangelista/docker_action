@@ -15,3 +15,5 @@ echo "ENTRYPOINT::BOOTSTRAP ${BOOTSTRAP}"
 version=$(cat /etc/issue)
 
 echo "version ${version}"
+
+exec "$@"
