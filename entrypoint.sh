@@ -8,9 +8,17 @@ export USER_NAME="${USER_NAME:-}"
 export USER_EMAIL="${USER_EMAIL:-}"
 
 mkdir -p ~/${PROJECT}
+
 cd ~/${PROJECT}/
 
+mkdir -m 700 /root/.ssh
+
+touch -m 600 /root/.ssh/known_hosts
+
+ssh-keyscan github.com > /root/.ssh/known_hosts
+
 git config --global user.name  ${USER_NAME}
+
 git config --global user.email ${USER_EMAIL}
 
 [ -f "autoproj_install" ] || wget -nv ${AUTOPROJ_INSTALL}
