@@ -2,16 +2,13 @@
 
 OPTION_SED_INDENT='s/^/      /'
 
-# Settings
 if [ -f "$PROJECT" ]; then export PROJECT=$(<${PROJECT:-"sonarsim"}); fi
 if [ -f "$DISTRO" ]; then export DISTRO=$(<${DISTRO:-"focal"}); fi
-if [ -f "$BOOTSTRAP" ]; then export BOOTSTRAP=$(<${BOOTSTRAP:-}); fi
+if [ -f "$BOOTSTRAP_URL" ]; then export BOOTSTRAP_URL=$(<${BOOTSTRAP_URL:-}); fi
+if [ -f "$USER_NAME" ]; then export USER_NAME=$(<${USER_NAME:-"sonarsim"}); fi
+if [ -f "$USER_EMAIL" ]; then export USER_EMAIL=$(<${USER_EMAIL:-"sonarsim@sonarsim.com"}); fi
 
 export IMAGE_NAME=${PROJECT}-${DISTRO}:devel
-export USER="$(id -nu)"
-export UUID="$(id -u)"
-export UGID="$(id -g)"
-export USER_WORKSPACE="~/workspace"
 
 case ${DISTRO} in
     "xenial")
@@ -35,4 +32,7 @@ docker run -t --rm \
             --net host \
             --name overview \
             -e PROJECT=${PROJECT} \
+            -e BOOTSTRAP_URL=${BOOTSTRAP_URL} \
+            -e USER_NAME=${USER_NAME} \
+            -e USER_EMAIL=${USER_EMAIL} \
             ${IMAGE_NAME}

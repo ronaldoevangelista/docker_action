@@ -12,6 +12,12 @@ inputs:
       address package build conf containing all 
       commands to install download and install packages
     required: true
+  user-name:
+    description: 'Github user pusher email'
+    required: true
+  user-mail:
+    description: 'Github user pusher name'
+    required: true    
 runs:
   using: 'composite'
   steps:
@@ -21,4 +27,6 @@ runs:
       env:
         DISTRO:  ${{ inputs.distro-name }}
         PROJECT: ${{ inputs.project-name }}
-        BOOTSTRAP: ${{ inputs.bootstrap }}
+        BOOTSTRAP_URL: ${{ inputs.bootstrap }}
+        USER_NAME: ${{ inputs.user-name }}
+        USER_EMAIL: ${{ inputs.user-mail }}
