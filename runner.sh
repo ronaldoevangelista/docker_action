@@ -1,11 +1,9 @@
 #!/bin/bash
 
-OPTION_SED_INDENT='s/^/      /'
-
 if [ -f "$PROJECT" ]; then export PROJECT=$(<${PROJECT:-"sonarsim"}); fi
 if [ -f "$DISTRO" ]; then export DISTRO=$(<${DISTRO:-"focal"}); fi
 if [ -f "$BOOTSTRAP_URL" ]; then export BOOTSTRAP_URL=$(<${BOOTSTRAP_URL:-}); fi
-if [ -f "$USER_NAME" ]; then export USER_NAME=$(<${USER_NAME:-"sonarsim"}); fi
+if [ -f "$USER_NAME" ]; then export USER_NAME=$(<${USER_NAME:-"Sonarsim"}); fi
 if [ -f "$USER_EMAIL" ]; then export USER_EMAIL=$(<${USER_EMAIL:-"sonarsim@sonarsim.com"}); fi
 
 export IMAGE_NAME=${PROJECT}-${DISTRO}:devel
@@ -23,16 +21,15 @@ case ${DISTRO} in
 esac
 
 docker build --rm \
-             --build-arg IMAGE_BASE=${IMAGE_BASE} \
-             --compress \
-             --no-cache=true \
-             -t ${IMAGE_NAME} .
+            --build-arg IMAGE_BASE=${IMAGE_BASE} \
+            --compress \
+            --no-cache=true \
+            -t ${IMAGE_NAME} .
 
 docker run -t --rm \
             --net host \
-            --name overview \
             -e PROJECT=${PROJECT} \
             -e BOOTSTRAP_URL=${BOOTSTRAP_URL} \
             -e USER_NAME=${USER_NAME} \
             -e USER_EMAIL=${USER_EMAIL} \
-            ${IMAGE_NAME}
+            --name ${PROJECT}-${DISTRO} ${IMAGE_NAME} 
