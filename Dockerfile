@@ -36,10 +36,24 @@ ENV LANGUAGE=en_US.UTF-8
 ENV LANG=en_US.UTF-8
 ENV LC_ALL=en_US.UTF-8
 
+ARG USER
+ENV USERNAME $USER
+ENV UUID $UUID
+ENV UGID $UGID
+
+RUN useradd -m $USER && \
+    echo "$USER:$USER" | chpasswd && \
+    usermod --shell /bin/bash $USER && \
+    usermod -aG sudo $USER && \
+    echo "$USER ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers.d/$USER && \
+    chmod 0440 /etc/sudoers.d/$USER && \
+    usermod  --uid $UUID $USER && \
+    groupmod --gid $UGID $USER; exit 0
+
 COPY entrypoint.sh /entrypoint.sh
 
 RUN chmod +x /entrypoint.sh
 
 ENTRYPOINT ["sh", "/entrypoint.sh"]
 
-CMD ["exit"]
+CMD ["/bin/bash"]
